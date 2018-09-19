@@ -1367,17 +1367,19 @@ define([
          * Animate the point.
          * @param {Number} direction The direction the glider is animated. Can be +1 or -1.
          * @param {Number} stepCount The number of steps.
+         * @param {Number} stepInterval The number of steps interval.
          * @name Glider#startAnimation
          * @see Glider#stopAnimation
          * @function
          */
-        startAnimation: function (direction, stepCount) {
+        startAnimation: function (direction, stepCount, stepInterval) {
+            stepInterval = stepInterval || 250;
             var that = this;
-
+            
             if ((this.type === Const.OBJECT_TYPE_GLIDER) && !Type.exists(this.intervalCode)) {
                 this.intervalCode = window.setInterval(function () {
                     that._anim(direction, stepCount);
-                }, 250);
+                }, stepInterval);
 
                 if (!Type.exists(this.intervalCount)) {
                     this.intervalCount = 0;
